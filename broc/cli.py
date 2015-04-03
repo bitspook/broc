@@ -1,5 +1,6 @@
 import click
 import broc
+import db
 
 @click.group()
 def cli():
@@ -16,17 +17,31 @@ def init():
 
     return click.echo(click.style("Not a git repo", fg='red'))
 
-
 @cli.command()
-def stats():
-    """Show today's stats (income and expenditure)"""
-    click.echo("Showing stats")
+@click.option('-p', default=0, help="Number of points you spent")
+@click.option('-m', default="because I wanted to. Biatch!", help="Reason for which you spent those poor brownie points. You spent the brownie points :'(")
+@click.option('-e', help="Email address of the user who want to spend brownie points. Defaults to global git user", default='')
+def spend(p, m, e):
+    """Spend <points> for <email> because <msg>"""
+    points = p
+    msg = m
+    email = broc.GIT_CONFIG['email'] if not e else e
 
-@cli.command()
-@click.option('--points', default=1, help="Number of points you spent")
-@click.option('--msg', default="Because I want to. Biatch!", help="Reason you spent those poor brownie points. You spent the brownie points :'(")
-def spend(points, msg):
-    """Spend <points> because <msg>"""
+    if points > 0:
+        db.add_spend_entry(points, msg, email)
+
     points = click.style(str(points), fg='red')
-    msg = click.style(msg, fg='cyan')
-    click.echo("Spend {0} points because {1}".format(points, msg))
+    msg = click.style(msg, fg='red')
+    email = click.style(email, fg='cyan')
+    click.echo("{2} spent {0} points {1}".format(points, msg, email))
+
+
+@cli.command()
+@click.option('-e', help="Email address of the user who want to spend brownie points. Defaults to global git user", default='')
+def stats(e):
+    """Show today's stats (income and expenditure)"""
+    email = e if e else broc.GIT_CONFIG['email']
+
+    balance = db.get_total_brownie_points(email)
+    today_total_income = db.get_todays_income(email)
+    today_total_expenditure = db.get_todays_expenditure(email)

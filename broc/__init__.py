@@ -11,6 +11,13 @@ BROC_HOOKS_PATHS = {
     'post-commit': BROC_HOOKS_ROOT_DIR + '/post_commit_hook.py'
 }
 
+GIT_CONFIG = {
+    'email': (lambda: shell('git config --global --get user.email').output()[0])(),
+    'author': (lambda: shell('git config --global --get user.name').output()[0])()
+}
+
+get_global_git_email = lambda: shell('git config --global --get user.email').output()[0]
+
 is_in_git_repo = lambda : len(shell('git rev-parse').errors()) == 0
 get_git_root = lambda : shell('git rev-parse --show-toplevel').output()[0] if is_in_git_repo() else False
 get_git_hooks_dir = lambda : get_git_root() + '/.git/hooks' if get_git_root() else False

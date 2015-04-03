@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 import broc
 from broc import shell, db
+from datetime import datetime
+
 
 repo = broc.get_git_root()
 
 (hash, msg, email, author, timestamp) = shell('git log -1 --pretty=format:%H|||%s|||%ae|||%an|||%at').output()[0].split('|||')
+
+created_at = datetime.fromtimestamp(float(timestamp))
 
 stats_pairs = map(
     lambda s: s.split('\t')[:2],
@@ -20,6 +24,4 @@ num_files_changed = len(stats_pairs)
 
 brownie_points = broc.calculate_brownie_points(len(msg), num_files_changed, additions, deletions)
 
-db.add_commit_entry(repo, hash, msg, brownie_points, timestamp, author, email)
-
-print "Brownie points earned:", brownie_points
+db.add_commit_entry(repo, hash, msg, brownie_points, created_at, author, email)

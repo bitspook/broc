@@ -58,28 +58,22 @@ def add_spend_entry(points_spent, message, email, conn, cursor):
 @db_operation
 def get_total_brownie_points(email, conn, cursor):
     """Get total brownie points remaining in the account at the moment"""
-    total_income = cursor.execute('SELECT sum(points_earned) FROM income WHERE author_email = ?', (email,)).fetchall()[0][0]
-    total_expenditure = cursor.execute('SELECT sum(points_spent) FROM expense WHERE author_email = ?', (email,)).fetchall()[0][0]
+    total_income = cursor.execute('SELECT sum(points_earned) FROM income WHERE author_email = ?', (email,)).fetchall()[0][0] or 0
+    total_expenditure = cursor.execute('SELECT sum(points_spent) FROM expense WHERE author_email = ?', (email,)).fetchall()[0][0] or 0
 
     balance = total_income - total_expenditure
 
     conn.commit()
     conn.close()
+
     return balance
 
 @db_operation
-def get_todays_income(email, conn, cursor):
-    income = 0
+def get_todays_stats(email, conn, cursor):
+    income = cursor.execute("SELECT sum(points_earned) FROM income WHERE created_at >= date('now') and author_email = ?", (email, )).fetchall()[0][0] or 0
+    expenditure = cursor.execute("SELECT sum(points_spent) FROM expense WHERE created_at >= date('now') and author_email = ?", (email, )).fetchall()[0][0] or 0
 
     conn.commit()
     conn.close()
 
-    print income
-
-    return income
-
-@db_operation
-def get_todays_expenditure(email, conn, cursor):
-    conn.commit()
-    conn.close()
-    pass
+    return (income, expenditure, )

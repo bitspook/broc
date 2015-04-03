@@ -43,5 +43,13 @@ def stats(e):
     email = e if e else broc.GIT_CONFIG['email']
 
     balance = db.get_total_brownie_points(email)
-    today_total_income = db.get_todays_income(email)
-    today_total_expenditure = db.get_todays_expenditure(email)
+    today_income, today_expenditure = db.get_todays_stats(email)
+
+    earned = click.style('Today Earned: ' + str(today_income), fg='green')
+    spent = click.style('Today Spent: ' + str(today_expenditure), fg='red')
+    total = click.style('Brownie Balance: ', fg='cyan')
+    balance = click.style(str(balance), fg=(lambda b: 'green' if b > 0 else 'red')(balance))
+
+    click.echo(earned)
+    click.echo(spent)
+    click.echo(total + balance)

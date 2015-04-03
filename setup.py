@@ -13,7 +13,13 @@ setup(
     author="Charanjit Singh",
     author_email="ckhabra@gmail.com",
     packages=find_packages(),
-    install_requires=[],
+    install_requires=[
+        'Click'
+    ],
+    entry_points='''
+        [console_scripts]
+        broc=broc:cli
+    ''',
     long_description=long_description,
     classifiers=[
         "Programming Language :: Python",

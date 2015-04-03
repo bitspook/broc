@@ -4,7 +4,8 @@ from shell import shell
 
 from cli import cli
 
-BROC_HOOKS_ROOT_DIR = path.dirname(path.realpath(__file__)) + '/git-hooks'
+BROC_ROOT_DIR = path.dirname(path.realpath(__file__))
+BROC_HOOKS_ROOT_DIR = BROC_ROOT_DIR + '/git-hooks'
 
 BROC_HOOKS_PATHS = {
     'post-commit': BROC_HOOKS_ROOT_DIR + '/post_commit_hook.py'
@@ -20,3 +21,10 @@ def link_file_in_dir_as(hook_name, dir_path, link_name):
 
     ln = shell('ln -s {0} {1}'.format(hook_path, link_path))
     return ln.code
+
+def calculate_brownie_points(commit_msg_length, num_files_changed, additions, deletions):
+    commit_score = 1 + int(commit_msg_length/20)
+    additions_score = int(additions/50)
+    deletions_score = int(deletions/100)
+
+    return commit_score + additions_score + deletions_score + int(num_files_changed)

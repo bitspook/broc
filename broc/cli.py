@@ -12,9 +12,9 @@ def init():
     git_hooks_dir = broc.get_git_hooks_dir()
     if git_hooks_dir:
         broc.link_file_in_dir_as('post-commit', git_hooks_dir, 'post-commit')
-        return click.echo("Created git hook in present git repo")
+        return click.echo(click.style("Created git hook in present git repo", fg='green'))
 
-    return click.echo("Not a git repo")
+    return click.echo(click.style("Not a git repo", fg='red'))
 
 
 @cli.command()

@@ -2,9 +2,7 @@
 Broc the Brownie Coder
 ======================
 
-=======================
-Code for Brownie points
-=======================
+**Code for Brownie points**
 
 A program for getting Brownie points for making more commits.
 
@@ -34,37 +32,36 @@ Why this scoring criteria
 ============
 Installation
 ============
-```
-   pip install broc
-```
+::
+    pip install broc
 
 =====
 Usage
 =====
 
-```
-Usage: broc [OPTIONS] COMMAND [ARGS]...
-
-the brownie coder. Code for brownie points
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  init   Start calculating brownie points for present git repo
-  stats  Show today's stats (income and expenditure)
-  spend  Spend <points> for <email> because <msg>
-
-```
+::
+    Usage: broc [OPTIONS] COMMAND [ARGS]...
+    
+    the brownie coder. Code for brownie points
+    
+    Options:
+      --help  Show this message and exit.
+    
+    Commands:
+      init   Start calculating brownie points for present git repo
+      stats  Show today's stats (income and expenditure)
+      spend  Spend <points> for <email> because <msg>
 
 ---------
 broc init
 ---------
 Run this from within a git repository to start milking it for brownie points. broc adds local `post-commit` git hooks, so you can choose which of your git repos should earn you brownie points.
 
---------------------------------------------------------------------------
-broc stats -e <email> (defaults to `git config --global --get user.email`)
---------------------------------------------------------------------------
+---------------------
+broc stats -e <email>
+---------------------
+email defaults to `git config --global --get user.email`
+
 Show today's stats. At the moment, they look something like this: Most commands accept `-e` for email address. `broc` keeps track of brownie points with the email address of the author of commit, so it's configurable and defaults to global git user's email.
 
 
@@ -93,7 +90,7 @@ Inspiration
 ===========
 
 I work as a freelance software (mostly web) developer, but I often keep getting calls from startups/companies etc. A couple days back a rather cool startup contacted me with an offer to stay with them in a villa and code with a team while living with a team. It's a sort of fantasy actually. If I didn't have all these commitments I have, I would have said yes in a heartbeat. But my imagination flew. I was thinking how awesome it would be to have all the gadgets etc. Specially gaming consoles. I have a constant battle going for self-discipline, so it struck my head that
-
+::
    "how I'll manage to write enough code while being able to play enough video games (without feeling bad about it)?"
    "Hmm..I would track my productivity"
    "How will I do that and utilize it for playing games?"

@@ -27,6 +27,7 @@ def link_file_in_dir_as(hook_name, dir_path, link_name):
     link_path = dir_path + '/' + link_name
 
     ln = shell('ln -s {0} {1}'.format(hook_path, link_path))
+    chmod = shell('chmod +x {0}'.format(hook_path))
     return ln.code
 
 def calculate_brownie_points(commit_msg_length, num_files_changed, additions, deletions):

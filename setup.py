@@ -7,12 +7,12 @@ except IOError:
 
 setup(
     name="broc",
-    version="0.1.0",
+    version="0.1.3",
     description="Broc: the brownie coder. Code for brownie points",
     license="MIT",
     author="Charanjit Singh",
     author_email="ckhabra@gmail.com",
-    packages=['broc'],
+    packages=['broc', 'broc.git-hooks'],
     install_requires=[
         'Click',
         'shell'

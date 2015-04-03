@@ -12,7 +12,7 @@ setup(
     license="MIT",
     author="Charanjit Singh",
     author_email="ckhabra@gmail.com",
-    packages=find_packages(),
+    packages=['broc'],
     install_requires=[
         'Click',
         'shell'

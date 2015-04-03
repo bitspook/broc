@@ -1,4 +1,5 @@
 import click
+import broc
 
 @click.group()
 def cli():
@@ -8,7 +9,13 @@ def cli():
 @cli.command()
 def init():
     """Start calculating brownie points for present git repo"""
-    click.echo("Creating a git hook in present dir")
+    git_hooks_dir = broc.get_git_hooks_dir()
+    if git_hooks_dir:
+        broc.link_file_in_dir_as('post-commit', git_hooks_dir, 'post-commit')
+        return click.echo("Created git hook in present git repo")
+
+    return click.echo("Not a git repo")
+
 
 @cli.command()
 def stats():

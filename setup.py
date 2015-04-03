@@ -14,7 +14,8 @@ setup(
     author_email="ckhabra@gmail.com",
     packages=find_packages(),
     install_requires=[
-        'Click'
+        'Click',
+        'shell'
     ],
     entry_points='''
         [console_scripts]

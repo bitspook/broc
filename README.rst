@@ -68,9 +68,6 @@ email defaults to `git config --global --get user.email`
 
 Show today's stats. At the moment, they look something like this: Most commands accept `-e` for email address. `broc` keeps track of brownie points with the email address of the author of commit, so it's configurable and defaults to global git user's email.
 
-
-.. image:: https://i.imgur.com/5FNcsIS.png
-
            
 ------------------------------------------------------------------------------------------------
 broc spend -p <num> -m <message> -e <email> (defaults to `git config --global --get user.email`)

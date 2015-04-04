@@ -6,6 +6,10 @@ Broc the Brownie Coder
 
 A program for getting Brownie points for making more commits.
 
+.. image:: http://share.gifyoutube.com/vJLOPV.gif
+      
+
+
 ===========
 How it work
 ===========  
@@ -66,15 +70,14 @@ Show today's stats. At the moment, they look something like this: Most commands 
 
 
 .. image:: https://i.imgur.com/5FNcsIS.png
-:alt: broc stats output 
 
+           
 ------------------------------------------------------------------------------------------------
 broc spend -p <num> -m <message> -e <email> (defaults to `git config --global --get user.email`)
 ------------------------------------------------------------------------------------------------
-
-```
+::
   broc spend -p 50 -m "playing Coll Of Duty 4. Because I don't have GTA V" 
-```
+
 
 Spend <num> points for <message>. 
 
